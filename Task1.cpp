@@ -10,9 +10,9 @@
 
 using namespace std;
 
-#define HOST "tcp://in03.bya.ac:3306"
-#define USER "u143_V8d54d6jFy"
-#define PASS "a.X.lLMvRyNw.3o=G.WjZK47"
+#define HOST "tcp://127.0.0.1:3306"
+#define USER "root"
+#define PASS "password"
 
 class Task1
 {
@@ -41,9 +41,6 @@ public:
 
                 stmt = con->createStatement();
 
-                //Run Query
-                // SELECT * FROM 'DEPT' WHERE DEPT.Advisor = name;
-                // Print
                 string query = "SELECT * FROM Results";
 
                 res = stmt->executeQuery(query);
@@ -65,24 +62,20 @@ public:
                 cout << "Enter Department Name\n";
                 cin >> dept;
 
-                //Run Query
-                // SELECT * FROM 'DEPT' WHERE DEPT.Advisor = name;
-                // Print
-
                 con->setSchema(dept);
 
                 stmt = con->createStatement();
 
-                string query = "SELECT * FROM Results INNER JOIN Students ON `Subjects.Subject ID` = `Results.Subject ID` WHERE `Class ID`=" + id;
+                string query = "SELECT * FROM Results INNER JOIN Subjects ON Subjects.`Subject ID` = Results.`Subject ID` INNER JOIN Students ON Students.`Class ID`=" + id;
                 cout << query << endl;
 
                 res = stmt->executeQuery(query);
                 cout << "Student ID  Subject ID  Marks\n";
                 while (res->next())
                 {
-                    /* Access column fata by numeric offset, 1 is the first column */
                     cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
                 }
+                break;
             }
             // Faculty Dashboard
             case 3:
@@ -93,24 +86,20 @@ public:
                 cout << "Enter Department Name\n";
                 cin >> dept;
 
-                //Run Query
-                // SELECT * FROM 'DEPT' WHERE DEPT.Faculty = name;
-                // Print
-
                 con->setSchema(dept);
 
                 stmt = con->createStatement();
 
-                string query = "SELECT * FROM Results INNER JOIN Subjects ON `Subjects.Subject ID` = `Results.Subject ID` WHERE `Faculty ID`=" + id;
+                string query = "SELECT * FROM Results INNER JOIN Subjects ON Subjects.`Subject ID` = Results.`Subject ID` WHERE Subjects.`Faculty ID`=" + id;
                 cout << query << endl;
 
                 res = stmt->executeQuery(query);
                 cout << "Student ID  Subject ID  Marks\n";
                 while (res->next())
                 {
-                    /* Access column fata by numeric offset, 1 is the first column */
                     cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
                 }
+                break;
             }
             //Student Dashboard
             case 4:
@@ -128,26 +117,27 @@ public:
                 string query = "SELECT * FROM Results WHERE `Student ID`=" + id;
 
                 res = stmt->executeQuery(query);
-                cout << "Student ID  Subject ID  Marks\n";
+                cout << "Subject ID  Marks\n";
                 while (res->next())
                 {
-                    /* Access column fata by numeric offset, 1 is the first column */
-                    cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
+                    cout << res->getString(2) << "            " << res->getString(3) << endl;
                 }
+                break;
             }
             }
         }
         catch (sql::SQLException &e)
         {
-                if(e.getErrorCode() == 0)
-                {
-                    cout<<"Executed Successfully!\n";
-                }else
-                {
+            if (e.getErrorCode() == 0)
+            {
+                cout << "Executed Successfully!\n";
+            }
+            else
+            {
                 cout << "# ERR: " << e.what();
                 cout << " (MySQL error code: " << e.getErrorCode();
                 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-                }
+            }
         }
     }
     void getInput()
@@ -210,104 +200,85 @@ public:
 
     void adminDashboard()
     {
-
-        //MySQL Driver Init
-        sql::Driver *driver;
-        sql::Connection *con;
-        sql::Statement *stmt;
-        sql::ResultSet *res;
-        driver = get_driver_instance();
-        con = driver->connect(HOST, USER, PASS);
-
-        //Fetch Data
-        string name, dept;
-        cout << "Enter Student ID\n";
-        cin >> name;
-        cout << "Enter Department Name\n";
-        cin >> dept;
-
-        cout << "Actions that can be performed\n";
-        cout << "1. Enter Student Marks\n";
-        cout << "2. View Student Marks\n";
-        int ID;
-        cin >> ID;
-
-        switch (ID)
+        try
         {
-        case 1:
-        {
-            string subject, faculty, marks;
-            cout << "Enter Subject ID\n";
-            cin >> subject;
-            cout << "Enter Mark\n";
-            cin >> marks;
-            cout << "Enter Faculty ID\n";
-            cin >> faculty;
+            //MySQL Driver Init
+            sql::Driver *driver;
+            sql::Connection *con;
+            sql::Statement *stmt;
+            sql::ResultSet *res;
+            driver = get_driver_instance();
+            con = driver->connect(HOST, USER, PASS);
 
-            try
+            //Fetch Data
+            string name, dept;
+            cout << "Enter Student ID\n";
+            cin >> name;
+            cout << "Enter Department Name\n";
+            cin >> dept;
+            con->setSchema(dept);
+
+            cout << "Actions that can be performed\n";
+            cout << "1. Enter Student Marks\n";
+            cout << "2. View Student Marks\n";
+            int ID;
+            cin >> ID;
+
+            switch (ID)
             {
-
-                con->setSchema("s143_test");
+            case 1:
+            {
+                string subject, faculty, marks;
+                cout << "Enter Subject ID\n";
+                cin >> subject;
+                cout << "Enter Mark\n";
+                cin >> marks;
+                cout << "Enter Faculty ID\n";
+                cin >> faculty;
 
                 stmt = con->createStatement();
 
                 string query = "INSERT INTO Results (`Student ID`,`Subject ID`,`Mark`,`Faculty ID`) VALUES ('" + name + "','" + subject + "','" + marks + "','" + faculty + "');";
 
                 res = stmt->executeQuery(query);
+                break;
             }
-            catch (sql::SQLException &e)
+            case 2:
             {
-                if(e.getErrorCode() == 0)
-                {
-                    cout<<"Executed Successfully!\n";
-                }else
-                {
-                cout << "# ERR: " << e.what();
-                cout << " (MySQL error code: " << e.getErrorCode();
-                cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-                }
-            }
-            break;
-        }
-        case 2:
-        {
-            try
-            {
-                driver = get_driver_instance();
-                con = driver->connect("tcp://in03.bya.ac:3306", "u143_V8d54d6jFy", "a.X.lLMvRyNw.3o=G.WjZK47");
-                con->setSchema("s143_test");
 
                 stmt = con->createStatement();
 
                 string query = "SELECT * FROM Results WHERE `Student ID` = " + name;
 
                 res = stmt->executeQuery(query);
-                cout << "Student ID  Subject ID  Marks\n";
+                cout << "Subject ID  Marks\n";
                 while (res->next())
                 {
                     /* Access column fata by numeric offset, 1 is the first column */
-                    cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
+                    cout << res->getString(2) << "           " << res->getString(3) << endl;
                 }
+
+                break;
             }
-            catch (sql::SQLException &e)
+            default:
             {
-                if(e.getErrorCode() == 0)
-                {
-                    cout<<"Executed Successfully!\n";
-                }else
-                {
+                cout << "Incorrect Option Selected\n";
+                break;
+            }
+            }
+        }
+        catch (sql::SQLException &e)
+        {
+            if (e.getErrorCode() == 0)
+            {
+                cout << "Executed Successfully!\n";
+            }
+            else
+            {
                 cout << "# ERR: " << e.what();
                 cout << " (MySQL error code: " << e.getErrorCode();
                 cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-                }
             }
-            break;
-        }
-        default:
-        {
-            cout << "Incorrect Option Selected\n";
-            break;
-        }
         }
     }
 };

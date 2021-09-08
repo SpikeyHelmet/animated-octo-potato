@@ -18,6 +18,14 @@ This program was run on Ubuntu 20.04.
 - Local or Hosted MySQL Server
 - VSCode or NetBeans
 
+## Instructions to run
+
+```bash
+  sudo apt-get install mysql-client mysql-server libmysqlcppconn-dev g++ gcc
+  g++ -o Task1 Task1.cpp -lmysqlcppconn
+  ./Task1
+```
+
 ## Schema
 
 ![Schema](https://i.imgur.com/89eKBSO.png)
