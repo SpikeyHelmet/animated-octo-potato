@@ -44,13 +44,15 @@ public:
                 string query = "SELECT * FROM Results";
 
                 res = stmt->executeQuery(query);
+                cout << "===============================";
                 cout << "Student ID  Subject ID  Marks\n";
+                cout << "===============================";
                 while (res->next())
                 {
                     /* Access column fata by numeric offset, 1 is the first column */
                     cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
                 }
-
+                cout << "===============================";
                 break;
             }
             // Advisor Dashboard
@@ -70,11 +72,14 @@ public:
                 cout << query << endl;
 
                 res = stmt->executeQuery(query);
+                cout << "===============================";
                 cout << "Student ID  Subject ID  Marks\n";
+                cout << "===============================";
                 while (res->next())
                 {
                     cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
                 }
+                cout << "===============================";
                 break;
             }
             // Faculty Dashboard
@@ -94,11 +99,14 @@ public:
                 cout << query << endl;
 
                 res = stmt->executeQuery(query);
+                cout << "===============================";
                 cout << "Student ID  Subject ID  Marks\n";
+                cout << "===============================";
                 while (res->next())
                 {
                     cout << res->getString(1) << "              " << res->getString(2) << "         " << res->getString(3) << endl;
                 }
+                cout << "===============================";
                 break;
             }
             //Student Dashboard
@@ -117,11 +125,14 @@ public:
                 string query = "SELECT * FROM Results WHERE `Student ID`=" + id;
 
                 res = stmt->executeQuery(query);
+                cout << "===============================";
                 cout << "Subject ID  Marks\n";
+                cout << "===============================";
                 while (res->next())
                 {
                     cout << res->getString(2) << "            " << res->getString(3) << endl;
                 }
+                cout << "===============================";
                 break;
             }
             }
@@ -156,42 +167,37 @@ public:
         //Admin
         case 1:
         {
-            cout << "Case 1\n";
             adminDashboard();
             getInput();
             break;
         }
         case 2:
         {
-            cout << "Case 2\n";
             Dashboard(1);
             getInput();
             break;
         }
         case 3:
         {
-            cout << "Case 3\n";
             Dashboard(2);
             getInput();
             break;
         }
         case 4:
         {
-            cout << "Case 4\n";
             Dashboard(3);
             getInput();
             break;
         }
         case 5:
         {
-            cout << "Case 5\n";
             Dashboard(4);
             getInput();
             break;
         }
         default:
         {
-            cout << "Incorrect details\n";
+            cout << "Incorrect Option Selected\n";
             getInput();
             break;
         }
@@ -211,9 +217,9 @@ public:
             con = driver->connect(HOST, USER, PASS);
 
             //Fetch Data
-            string name, dept;
+            string studentid, dept;
             cout << "Enter Student ID\n";
-            cin >> name;
+            cin >> studentid;
             cout << "Enter Department Name\n";
             cin >> dept;
             con->setSchema(dept);
@@ -221,6 +227,7 @@ public:
             cout << "Actions that can be performed\n";
             cout << "1. Enter Student Marks\n";
             cout << "2. View Student Marks\n";
+            cout << "3. Update Student Marks\n";
             int ID;
             cin >> ID;
 
@@ -228,17 +235,15 @@ public:
             {
             case 1:
             {
-                string subject, faculty, marks;
+                string subject, marks;
                 cout << "Enter Subject ID\n";
                 cin >> subject;
                 cout << "Enter Mark\n";
                 cin >> marks;
-                cout << "Enter Faculty ID\n";
-                cin >> faculty;
 
                 stmt = con->createStatement();
 
-                string query = "INSERT INTO Results (`Student ID`,`Subject ID`,`Mark`,`Faculty ID`) VALUES ('" + name + "','" + subject + "','" + marks + "','" + faculty + "');";
+                string query = "INSERT INTO Results (`Student ID`,`Subject ID`,`Mark`) VALUES ('" + studentid + "','" + subject + "','" + marks + "');";
 
                 res = stmt->executeQuery(query);
                 break;
@@ -248,16 +253,34 @@ public:
 
                 stmt = con->createStatement();
 
-                string query = "SELECT * FROM Results WHERE `Student ID` = " + name;
+                string query = "SELECT * FROM Results WHERE `Student ID` = " + studentid;
 
                 res = stmt->executeQuery(query);
+                cout << "===============================";
                 cout << "Subject ID  Marks\n";
+                cout << "===============================";
                 while (res->next())
                 {
                     /* Access column fata by numeric offset, 1 is the first column */
                     cout << res->getString(2) << "           " << res->getString(3) << endl;
                 }
+                cout << "===============================";
+                break;
+            }
+            case 3:
+            {
 
+                string subject, marks;
+                cout << "Enter Subject ID\n";
+                cin >> subject;
+                cout << "Enter New Mark\n";
+                cin >> marks;
+
+                stmt = con->createStatement();
+
+                string query = "UPDATE Results SET `Mark` = " + marks + " WHERE `Student ID`= " + studentid + " AND `Subject ID`= " + subject + ");";
+
+                res = stmt->executeQuery(query);
                 break;
             }
             default:

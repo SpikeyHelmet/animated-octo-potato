@@ -14,16 +14,27 @@ A simple console application to add the student's marks for each semester in an 
 
 This program was run on Ubuntu 20.04.
 
-- C++/MySQL Connector Driver
+- C++ Libs (or) JDK Libs [Version 11+]
+- C++/MySQL Connector Driver || Java/MySQL Connector Driver
 - Local or Hosted MySQL Server
-- VSCode or NetBeans
+- VSCode or any IDE
 
 ## Instructions to run
+
+### C++
 
 ```bash
   sudo apt-get install mysql-client mysql-server libmysqlcppconn-dev g++ gcc
   g++ -o Task1 Task1.cpp -lmysqlcppconn
   ./Task1
+```
+
+### Java
+
+```bash
+  sudo apt-get install default-jdk
+  javac Results.java
+  java -cp .:mysql-connector.jar Results
 ```
 
 ## Schema
@@ -32,4 +43,6 @@ This program was run on Ubuntu 20.04.
 
 ## References
 
-[CPP Driver](https://dev.mysql.com/doc/connector-cpp/1.1/en/connector-cpp-examples-complete-example-1.html)
+[C++ Driver](https://dev.mysql.com/doc/connector-cpp/1.1/en/connector-cpp-examples-complete-example-1.html)
+
+[Java Driver](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-examples.html)
