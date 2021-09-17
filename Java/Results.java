@@ -70,21 +70,27 @@ public class Results {
                 case 1: {
                     System.out.println("Enter Department Name");
                     String Dept = s.next();
+                    System.out.println("Enter Semester");
+                    String sem = s.next();
 
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + Dept, User,
                             Password);
 
                     Statement stmt = con.createStatement();
 
-                    ResultSet rs = stmt.executeQuery("SELECT * FROM Results");
-                    System.out.println("===============================");
-                    System.out.println("Student ID  Subject ID  Marks");
-                    System.out.println("===============================");
+                    String query = "SELECT r.`Student ID` ,r.`Subject ID`, s.`Subject Code`, r.Mark , st.`Student Name` FROM Results r LEFT JOIN Subjects s ON r.`Subject ID` = s.`Subject ID` LEFT JOIN Students st ON st.`Student ID` = r.`Student ID` WHERE s.Semester = " + sem; 
+
+                    ResultSet rs = stmt.executeQuery(query);
+                    
+                    System.out.println("Department: "+ Dept);
+                    System.out.println("Semester: "+ sem);
+                    System.out.println("===========================================================================");
+                    System.out.println("Student ID    Subject ID     Subject Code        Mark        Student Name");
+                    System.out.println("===========================================================================");
                     while (rs.next()) {
-                        System.out.println(
-                                rs.getString(1) + "              " + rs.getString(2) + "         " + rs.getString(3));
+                        System.out.println("      " + rs.getString(1) + "            " + rs.getString(2) + "            " + rs.getString(3)  + "            " + rs.getString(4)  + "            " + rs.getString(5));
                     }
-                    System.out.println("===============================");
+                    System.out.println("===========================================================================");
                     con.close();
 
                     break;
@@ -155,17 +161,18 @@ public class Results {
                             Password);
                     Statement stmt = con.createStatement();
 
-                    String query = "SELECT * FROM Results WHERE `Student ID`=" + id;
+                    String query = "SELECT r.`Subject ID`, s.`Subject Code`, r.Mark FROM Results r LEFT JOIN Subjects s ON r.`Subject ID` = s.`Subject ID` WHERE r.`Student ID` = " + id; 
 
                     ResultSet rs = stmt.executeQuery(query);
-                    System.out.println("===============================");
-                    System.out.println("Subject ID  Marks");
-                    System.out.println("===============================");
-
+                    
+                    System.out.println("Student ID: "+ id);
+                    System.out.println("=============================================");
+                    System.out.println("Subject ID    Subject Code     Marks Obtained");
+                    System.out.println("=============================================");
                     while (rs.next()) {
-                        System.out.println(rs.getString(2) + "            " + rs.getString(3));
+                        System.out.println("      " + rs.getString(1) + "            " + rs.getString(2) + "            " + rs.getString(3));
                     }
-                    System.out.println("===============================");
+                    System.out.println("=============================================");
                     con.close();
                     break;
                 }
@@ -224,16 +231,18 @@ public class Results {
 
                     Statement stmt = con.createStatement();
 
-                    String query = "SELECT * FROM Results WHERE `Student ID` = " + studentid;
+                    String query = "SELECT r.`Subject ID`, s.`Subject Code`, r.Mark FROM Results r LEFT JOIN Subjects s ON r.`Subject ID` = s.`Subject ID` WHERE r.`Student ID` = " + studentid; 
 
                     ResultSet rs = stmt.executeQuery(query);
-                    System.out.println("===============");
-                    System.out.println("Subject ID  Marks");
-                    System.out.println("===============");
+                    
+                    System.out.println("Student ID: "+ studentid);
+                    System.out.println("=============================================");
+                    System.out.println("Subject ID    Subject Code     Marks Obtained");
+                    System.out.println("=============================================");
                     while (rs.next()) {
-                        System.out.println(rs.getString(2) + "           " + rs.getString(3));
+                        System.out.println("      " + rs.getString(1) + "            " + rs.getString(2) + "            " + rs.getString(3));
                     }
-                    System.out.println("===============");
+                    System.out.println("=============================================");
                     con.close();
                     break;
                 }

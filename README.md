@@ -19,6 +19,12 @@ This program was run on Ubuntu 20.04.
 - Local or Hosted MySQL Server
 - VSCode or any IDE
 
+Web Application Requires Tomcat V9 With Java 16.
+Deploy using the WAR.
+
+- Built on the Eclipse IDE.
+- Local or Hosted MySQL Server.
+
 ## Instructions to run
 
 ### C++
@@ -37,6 +43,14 @@ This program was run on Ubuntu 20.04.
   java -cp .:mysql-connector.jar Results
 ```
 
+### Tomcat
+
+```bash
+  sudo add-apt-repository ppa:linuxuprising/java
+  sudo apt-get install oracle-java16-installer
+  sudo apt-get install tomcat9 tomcat9-admin
+```
+
 ## Schema
 
 ![Schema](https://i.imgur.com/89eKBSO.png)
@@ -46,3 +60,5 @@ This program was run on Ubuntu 20.04.
 [C++ Driver](https://dev.mysql.com/doc/connector-cpp/1.1/en/connector-cpp-examples-complete-example-1.html)
 
 [Java Driver](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-examples.html)
+
+[Tomcat](https://linuxhint.com/install_apache_tomcat_server_ubuntu/)
