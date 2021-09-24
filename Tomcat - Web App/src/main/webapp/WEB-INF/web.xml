@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Results</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Admin</web-resource-name>
+    <url-pattern>/files/admin.jsp</url-pattern>
+    <url-pattern>/files/admininsert.jsp</url-pattern>
+    <url-pattern>/files/adminUpdate.jsp</url-pattern>
+    <url-pattern>/files/adminviewmarks.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>admin</role-name>
+  </auth-constraint>
+</security-constraint>
+
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>HOD</web-resource-name>
+    <url-pattern>/files/hod.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>hod</role-name>
+    <role-name>admin</role-name>
+  </auth-constraint>
+</security-constraint>
+
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Advisor</web-resource-name>
+    <url-pattern>/files/advisor.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>advisor</role-name>
+    <role-name>hod</role-name>
+    <role-name>admin</role-name>    
+  </auth-constraint>
+</security-constraint>
+
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Faculty</web-resource-name>
+    <url-pattern>/files/faculty.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>faculty</role-name>
+    <role-name>hod</role-name>
+    <role-name>admin</role-name>    
+  </auth-constraint>
+</security-constraint>
+
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Student</web-resource-name>
+    <url-pattern>/files/student.jsp</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>student</role-name>
+    <role-name>advisor</role-name>
+    <role-name>hod</role-name>
+    <role-name>admin</role-name>    
+  </auth-constraint>
+</security-constraint>
+
+<security-role>
+  <role-name>admin</role-name>
+  <role-name>hod</role-name>
+  <role-name>advisor</role-name>
+  <role-name>faculty</role-name>
+  <role-name>student</role-name>
+</security-role>
+
+<login-config>
+  <auth-method>FORM</auth-method>
+  <realm-name>WOW School Authenticator</realm-name>
+    <form-login-config>
+        <form-login-page>/login.jsp</form-login-page>
+        <form-error-page>/error.jsp</form-error-page>
+    </form-login-config>
+
+</login-config>
+
+</web-app>
+

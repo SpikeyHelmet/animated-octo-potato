@@ -12,7 +12,7 @@
     <div class="d-flex p-2 justify-content-center text-center">
     <h1>Class Result</h1>
     </div>
-	<form action="${pageContext.request.contextPath}/advisor" method="post">
+	<form action="${pageContext.request.contextPath}/advisor" style="width:400px;margin-left: auto;margin-right:auto;" method="post">
   <div class="form-group row">
     <label for="dept" class="col-4 col-form-label">Faculty ID</label> 
     <div class="col-8">
@@ -40,10 +40,11 @@
     </div>
   </div>
   <div class="form-group row">
-    <div class="offset-4 col-8">
-      <input name="submit" type="submit" value="Call Servlet" class="btn btn-primary">
+    <div style="margin-left: auto;margin-right:auto;">
+      <input name="submit" type="submit" value="Get Marks" class="btn btn-primary">
     </div>
   </div>
 	</form>
 </body>
+   <div class="d-flex justify-content-center p-2"><a href="${pageContext.request.contextPath}/logout">Logout</a></div>
 </html>

@@ -12,7 +12,7 @@
     <div class="d-flex p-2 justify-content-center text-center">
     <h1>Update Student Marks</h1>
     </div>
-	<form action="${pageContext.request.contextPath}/updatemarks" method="post">
+	<form action="${pageContext.request.contextPath}/updatemarks" style="width:400px;margin-left: auto;margin-right:auto;" method="post">
 	<div class="form-group row">
     <label class="col-4 col-form-label" for="studentid">Student ID</label> 
     <div class="col-8">
@@ -66,8 +66,8 @@
     </div>
   </div> 
   <div class="form-group row">
-    <div class="offset-4 col-8">
-      <input name="submit" type="submit" value="Call Servlet" class="btn btn-primary">
+    <div style="margin-left: auto;margin-right:auto;">
+      <input name="submit" type="submit" value="Update Marks" class="btn btn-primary">
     </div>
   </div>
 	</form>

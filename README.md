@@ -10,6 +10,8 @@ A simple console application to add the student's marks for each semester in an 
             4) Faculty -> They have read control over student's data for their subject.
             5) Student -> They have read control over their data.
 
+---
+
 ## Prerequisites
 
 This program was run on Ubuntu 20.04.
@@ -24,6 +26,8 @@ Deploy using the WAR.
 
 - Built on the Eclipse IDE.
 - Local or Hosted MySQL Server.
+
+---
 
 ## Instructions to run
 
@@ -51,9 +55,29 @@ Deploy using the WAR.
   sudo apt-get install tomcat9 tomcat9-admin
 ```
 
+Now before starting the Webserver make sure you complete the below procedure
+
+1. Make a file called **jaas.conf** in the Tomcat conf folder.
+2. `sudo nano $TOMCAT_SERVER_LOCATION/conf/jaas.conf`
+3. Paste the following into the file and save
+
+```bash
+WowLoginModule {
+    com.security.myLoginModule required debug=true;
+};
+```
+
+4. Add this to your launch flags.
+
+> -Djava.security.auth.login.config==$CATALINA_BASE/conf/jaas.config"
+
+---
+
 ## Schema
 
 ![Schema](https://i.imgur.com/89eKBSO.png)
+
+---
 
 ## References
 
@@ -62,3 +86,6 @@ Deploy using the WAR.
 [Java Driver](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-examples.html)
 
 [Tomcat](https://linuxhint.com/install_apache_tomcat_server_ubuntu/)
+
+[JAAS](https://www.byteslounge.com/tutorials/jaas-authentication-in-tomcat-example)
+[Auth](https://docs.oracle.com/cd/E19879-01/819-3669/6n5sg7cf9/index.html)

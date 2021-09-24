@@ -12,7 +12,7 @@
     <div class="d-flex p-2 justify-content-center text-center">
     <h1>View Department Results</h1>
     </div>
-	<form action="${pageContext.request.contextPath}/hod" method="post">
+	<form action="${pageContext.request.contextPath}/hod" style="width:400px;margin-left: auto;margin-right:auto;" method="post">
   <div class="form-group row">
     <label for="dept" class="col-4 col-form-label">Department Name</label> 
     <div class="col-8">
@@ -40,10 +40,11 @@
     </div>
   </div>
   <div class="form-group row">
-    <div class="offset-4 col-8">
-      <input name="submit" type="submit" value="Call Servlet" class="btn btn-primary">
+    <div style="margin-left: auto;margin-right:auto;">
+      <input name="submit" type="submit" value="Get Marks" class="btn btn-primary">
     </div>
   </div>
 	</form>
+	<div class="d-flex justify-content-center p-2"><a href="${pageContext.request.contextPath}/logout" role="button" class ="btn mr-md-2 mb-md-0 mb-2 btn-success btn-round">Logout</a></div>
 </body>
 </html>
