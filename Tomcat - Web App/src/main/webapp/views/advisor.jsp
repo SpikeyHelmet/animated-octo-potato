@@ -46,5 +46,5 @@
   </div>
 	</form>
 </body>
-   <div class="d-flex justify-content-center p-2"><a href="${pageContext.request.contextPath}/logout">Logout</a></div>
+<div class="d-flex justify-content-center p-2"><a href="${pageContext.request.contextPath}/logout" role="button" class ="btn mr-md-2 mb-md-0 mb-2 btn-success btn-round">Logout</a></div>
 </html>

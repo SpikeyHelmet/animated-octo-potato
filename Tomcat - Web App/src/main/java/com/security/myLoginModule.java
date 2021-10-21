@@ -10,6 +10,7 @@ import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -50,12 +51,9 @@ public class myLoginModule implements LoginModule {
           .getPassword());
 
       Class.forName("com.mysql.cj.jdbc.Driver");
-      Connection con = DriverManager.getConnection("jdbc:mysql://sql6.freemysqlhosting.net:3306/sql6439701", "sql6439701", "M1jYZTRbkQ");
+      Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/s2424_spikey", "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
 	
       PreparedStatement stmt = con.prepareStatement("SELECT * FROM Authentication WHERE Username = ? AND Password = ?");
-      
-      System.out.println(name);
-      System.out.println(password);
       
       stmt.setString(1, name);
       stmt.setString(2, password);
@@ -63,18 +61,22 @@ public class myLoginModule implements LoginModule {
       ResultSet rs = stmt.executeQuery();
 
       if (rs.next()) {
-    	  
+    	   		  
           login = name;
           userGroups = new ArrayList<String>();
-          System.out.println(rs.getString("Role"));
           userGroups.add(rs.getString("Role"));
+      }
+      else
+    	  {
+              // If credentials are INVALID we throw a LoginException
+        	  con.close();
+              throw new LoginException("Authentication failed");
+    	  }
+    	  
           con.close();
           return true;
-        } 
+          
       
-          // If credentials are INVALID we throw a LoginException
-    	  con.close();
-          throw new LoginException("Authentication failed");
 
     } catch (SQLException e) {
         System.out.println("SQL Exception: " + e.getMessage());

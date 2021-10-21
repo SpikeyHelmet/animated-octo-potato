@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.models.Models;
+
 @WebServlet("/updatemarks")
 public class updateMarks extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,36 +31,17 @@ public class updateMarks extends HttpServlet {
 		
 		PrintWriter writer = response.getWriter();
 		
+		Models model = new Models();
+		int value = model.updateMarksModel(studentid, subjectid, marks, dept);
 		
-		try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://in03.bya.ac:3306/" + dept, "u143_V8d54d6jFy", "a.X.lLMvRyNw.3o=G.WjZK47");
-		
-		PreparedStatement pstmt = con
-                .prepareStatement("UPDATE Results SET `Mark` = ? WHERE `Student ID`= ? AND `Subject ID`= ?");
-        pstmt.setString(1, marks);
-        pstmt.setString(2, studentid);
-        pstmt.setString(3, subjectid);
-        
-        int count = pstmt.executeUpdate();
-        
-        if (count > 0) {
+        if (value > 0) {
             writer.println("===============");
             writer.println("Query Executed Successfully!");
             writer.println("===============");
         } else {
            writer.println("Query Failed!");
         }
-
-        con.close();
-		
-		}catch (SQLException e) {
-            writer.println("SQL Exception: " + e.getMessage());
-            writer.println("SQL State: " + e.getSQLState());
-        } catch (Exception e) {
-            writer.println("Exception: " + e.getMessage());
-		}
-		writer.close();
+        
 	}
 
 }

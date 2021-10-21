@@ -2,16 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
   <display-name>Results</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>Check.jsp</welcome-file>
   </welcome-file-list>
   
   <security-constraint>
   <web-resource-collection>
     <web-resource-name>Admin</web-resource-name>
-    <url-pattern>/files/admin.jsp</url-pattern>
-    <url-pattern>/files/admininsert.jsp</url-pattern>
-    <url-pattern>/files/adminUpdate.jsp</url-pattern>
-    <url-pattern>/files/adminviewmarks.jsp</url-pattern>
+    <url-pattern>/views/admin.jsp</url-pattern>
+    <url-pattern>/views/admininsert.jsp</url-pattern>
+    <url-pattern>/views/adminUpdate.jsp</url-pattern>
+    <url-pattern>/views/adminviewmarks.jsp</url-pattern>
   </web-resource-collection>
   <auth-constraint>
     <role-name>admin</role-name>
@@ -21,7 +21,7 @@
   <security-constraint>
   <web-resource-collection>
     <web-resource-name>HOD</web-resource-name>
-    <url-pattern>/files/hod.jsp</url-pattern>
+    <url-pattern>/views/hod.jsp</url-pattern>
   </web-resource-collection>
   <auth-constraint>
     <role-name>hod</role-name>
@@ -32,7 +32,7 @@
   <security-constraint>
   <web-resource-collection>
     <web-resource-name>Advisor</web-resource-name>
-    <url-pattern>/files/advisor.jsp</url-pattern>
+    <url-pattern>/views/advisor.jsp</url-pattern>
   </web-resource-collection>
   <auth-constraint>
     <role-name>advisor</role-name>
@@ -44,7 +44,7 @@
   <security-constraint>
   <web-resource-collection>
     <web-resource-name>Faculty</web-resource-name>
-    <url-pattern>/files/faculty.jsp</url-pattern>
+    <url-pattern>/views/faculty.jsp</url-pattern>
   </web-resource-collection>
   <auth-constraint>
     <role-name>faculty</role-name>
@@ -56,13 +56,28 @@
   <security-constraint>
   <web-resource-collection>
     <web-resource-name>Student</web-resource-name>
-    <url-pattern>/files/student.jsp</url-pattern>
+    <url-pattern>/views/student.jsp</url-pattern>
   </web-resource-collection>
   <auth-constraint>
     <role-name>student</role-name>
     <role-name>advisor</role-name>
     <role-name>hod</role-name>
     <role-name>admin</role-name>    
+  </auth-constraint>
+</security-constraint>
+
+  <security-constraint>
+  <web-resource-collection>
+    <web-resource-name>Authentication</web-resource-name>
+    <url-pattern>/Auth.jsp</url-pattern>
+    <url-pattern>/views/index.html</url-pattern>
+  </web-resource-collection>
+  <auth-constraint>
+    <role-name>student</role-name>
+    <role-name>advisor</role-name>
+    <role-name>hod</role-name>
+    <role-name>admin</role-name>    
+    <role-name>faculty</role-name> 
   </auth-constraint>
 </security-constraint>
 
