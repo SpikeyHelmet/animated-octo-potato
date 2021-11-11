@@ -46,8 +46,6 @@ public class duoEnrollStatus extends HttpServlet {
 
 			     if(abc.equalsIgnoreCase("success")){
 			    	 
-			     System.out.println("YESS");
-
 			      Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/s2424_spikey", "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
 				
 					PreparedStatement pstmt = con
@@ -66,7 +64,6 @@ public class duoEnrollStatus extends HttpServlet {
 			      int count = pstmt.executeUpdate();
 			      
 			      if (count>0) {
-			    	    System.out.println("Executed");
 	    	   			response.sendRedirect(request.getContextPath() + "/duoPreauth");
 			      }
     	   		  else

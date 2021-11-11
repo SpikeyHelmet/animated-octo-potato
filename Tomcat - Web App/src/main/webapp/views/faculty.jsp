@@ -7,44 +7,44 @@
 <title>WOW School - Faculty</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
 </head>
 <body>
-    <div class="d-flex p-2 justify-content-center text-center">
-    <h1>Subject Result</h1>
+	<div class="defaultSVG">
+		<br>
+		<br>
+		<div class="d-flex justify-content-center">
+		    <h1 class="text-white">
+		        WOW RESULTS - FACULTY DASHBOARD
+		    </h1>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="authbox1">
+		<div>
+		    <h2 class="text-center">View Subject Marks</h2>
+		</div>
+		<br><br>
+		<div>
+		<form class="authboxS1" action="${pageContext.request.contextPath}/faculty" method="POST">
+			<div class="form-group">
+		    <label class="font-weight-bold">Faculty ID</label>
+        	<input id="facultyid" name="facultyid" placeholder="1" type="text" class="formInput form-control">
+		    </div>
+		    <div class="form-group">
+		    <label class="font-weight-bold">Department Name</label>
+		    <input id="dept" name="dept" placeholder="CSE" type="text" class="formInput form-control">
+		    </div>
+		    <br><br>
+		    <div class="text-center">
+		    <input type="submit" value="Submit" class="myButton" name="submit" placeholder="Submit">
+		    </div>
+		    <br>
+		</form>
+		</div>
+		</div>
     </div>
-	<form action="${pageContext.request.contextPath}/faculty" method="post" style="width:400px;margin-left: auto;margin-right:auto;">
-  <div class="form-group row">
-    <label for="dept" class="col-4 col-form-label">Faculty ID</label> 
-    <div class="col-8">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <i class="fa fa-mortar-board"></i>
-          </div>
-        </div> 
-        <input id="facultyid" name="facultyid" placeholder="1" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-    <div class="form-group row">
-    <label for="dept" class="col-4 col-form-label">Department Name</label> 
-    <div class="col-8">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">
-            <i class="fa fa-mortar-board"></i>
-          </div>
-        </div> 
-        <input id="dept" name="dept" placeholder="CSE" type="text" class="form-control">
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div style="margin-left: auto;margin-right:auto;">
-      <input name="submit" type="submit" value="Get Marks" class="btn btn-primary">
-    </div>
-  </div>
-	</form>
-	<div class="d-flex justify-content-center p-2"><a href="${pageContext.request.contextPath}/logout" role="button" class ="btn mr-md-2 mb-md-0 mb-2 btn-success btn-round">Logout</a></div>
 </body>
 </html>

@@ -111,11 +111,9 @@ public class myLoginModule implements LoginModule {
 
   @Override
   public boolean logout() throws LoginException {
-	System.out.println("Getting Called!");
     subject.getPrincipals().remove(userPrincipal);
     subject.getPrincipals().remove(rolePrincipal);
     return true;
-    
   }
 
 }

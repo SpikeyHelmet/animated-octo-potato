@@ -15,62 +15,46 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
   </head>
   <body>
-    <div class="d-flex p-2 justify-content-center text-center">
-      <h1>Authentication</h1>
+	<div class="authSVG">
+		<br>
+		<br>
+		<div class="d-flex justify-content-center">
+		    <h1 class="text-white">
+		        WOW SCHOOL RESULTS PORTAL
+		    </h1>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div class="authbox1">
+		<div>
+		    <h2 class="text-center">Authentication</h2>
+		    <p class="text-center">Kindly enter your username and password to access student records.</p>
+		</div>
+		<br><br>
+		<div>
+		<form class="authboxS1" action="j_security_check" method="POST">
+		    <div class="form-group">
+		    <label class="font-weight-bold">Username</label>
+		    <input type="text" class="formInput form-control" id="j_username" name="j_username">
+		    </div>
+		    <br>
+		    <div class="form-group">
+		    <label class="font-weight-bold">Password</label>
+		    <input type="password" class="formInput form-control" id="j_password" name="j_password">
+		    </div>
+		    <br><br>
+		    <div class="text-center">
+		    <input type="submit" value="Submit" class="myButton" name="submit" placeholder="Submit">
+		    </div>
+		    <br>
+		</form>
+		</div>
+		</div>
     </div>
-    <form
-      action="j_security_check"
-      style="width: 400px; margin-left: auto; margin-right: auto"
-      method="post"
-    >
-      <div class="form-group row">
-        <label class="col-4 col-form-label" for="studentid">Username</label>
-        <div class="col-8">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-address-card"></i>
-              </div>
-            </div>
-            <input
-              id="j_username"
-              name="j_username"
-              type="text"
-              class="form-control"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="dept" class="col-4 col-form-label">Password</label>
-        <div class="col-8">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fa fa-mortar-board"></i>
-              </div>
-            </div>
-            <input
-              id="j_password"
-              name="j_password"
-              type="text"
-              class="form-control"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div style="margin-left: auto; margin-right: auto">
-          <input
-            name="submit"
-            type="submit"
-            value="Submit"
-            class="btn btn-primary"
-          />
-        </div>
-      </div>
-    </form>
   </body>
 </html>

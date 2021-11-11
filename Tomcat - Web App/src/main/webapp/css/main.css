@@ -1,0 +1,88 @@
+.authSVG{
+    background: url(../assets/auth.svg);
+    background-size: cover;
+    height:100vh;
+}
+
+.defaultSVG{
+    background: url(../assets/default.svg);
+    background-size: cover;
+    height: 100vh;
+}
+
+.checkSVG{
+    background: url(../assets/check.svg);
+    background-size: cover;
+    height: 100vh;
+}
+
+.myButton {
+text-decoration:none;
+border-radius: 10px;
+border: solid 0px;
+background-color: #001122;
+padding: 12px 42px;
+color: white;
+}
+
+.myButton a{
+	color: white;
+	text-decoration:none;
+}
+
+.myButton2 {
+text-decoration:none;
+border-radius: 10px;
+border: solid 0px;
+background-color: #FFFFFF;
+padding: 12px 42px;
+color: black;
+}
+
+.myButton2 a{
+	color: black;
+	text-decoration:none;
+}
+
+.formInput2 {
+    background: #EFEFEF;
+    color: black;
+    height:60px;
+}
+
+.formInput2:focus {
+    background: #EFEFEF;
+    color: black;
+    height:60px;
+}
+
+.formInput {
+    background: #EFEFEF;
+    color: black;
+}
+
+.formInput:focus {
+    background: #EFEFEF;
+    color: black;
+}
+
+.authbox1{
+    width:650px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    margin: auto;
+    padding: 25px;
+}
+
+.authbox2{
+    width:700px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    margin: auto;
+    padding: 50px;
+}
+
+.authboxS1{
+    width:400px;
+    margin: auto;
+}

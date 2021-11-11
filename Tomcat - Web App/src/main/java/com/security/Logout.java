@@ -20,7 +20,7 @@ public class Logout extends HttpServlet {
     	
       request.logout();
       response.sendRedirect(request.getContextPath() 
-        + "/index.html");
+        + "/Check.jsp");
       
     }
 
