@@ -1,4 +1,4 @@
-## Task 1 - Result Management System
+## Task - Result Management System
 
 Task details :
 A simple console application to add the student's marks for each semester in an engineering college. A college can have multiple departments and a department can have different subjects for each semester.
@@ -89,3 +89,5 @@ WowLoginModule {
 
 [JAAS](https://www.byteslounge.com/tutorials/jaas-authentication-in-tomcat-example)
 [Auth](https://docs.oracle.com/cd/E19879-01/819-3669/6n5sg7cf9/index.html)
+
+[EmberJS Docs](https://guides.emberjs.com/release/)
