@@ -11,6 +11,8 @@ import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
+import com.unboundid.ldap.sdk.LDAPConnection;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -51,17 +53,15 @@ public class myLoginModule implements LoginModule {
           .getPassword());
 
       Class.forName("com.mysql.cj.jdbc.Driver");
-      Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/s2424_spikey", "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
+      Connection con = DriverManager.getConnection( System.getenv("mysqlhost")+ "/CSE", System.getenv("mysqlusr"), System.getenv("mysqlpw") );
 	
-      PreparedStatement stmt = con.prepareStatement("SELECT * FROM Authentication WHERE Username = ? AND Password = ?");
-      
+      PreparedStatement stmt = con.prepareStatement("SELECT * FROM Authentication WHERE Username = ?");
       stmt.setString(1, name);
-      stmt.setString(2, password);
-      
       ResultSet rs = stmt.executeQuery();
-
-      if (rs.next()) {
-    	   		  
+      String usrHost = System.getProperty("userHost");
+      LDAPConnection c = new LDAPConnection( usrHost, 389, name+"@"+usrHost , password);
+      
+      if (rs.next() & c.isConnected()) {
           login = name;
           userGroups = new ArrayList<String>();
           userGroups.add(rs.getString("Role"));
@@ -72,11 +72,10 @@ public class myLoginModule implements LoginModule {
         	  con.close();
               throw new LoginException("Authentication failed");
     	  }
-    	  
+      
+          c.close();
           con.close();
           return true;
-          
-      
 
     } catch (SQLException e) {
         System.out.println("SQL Exception: " + e.getMessage());

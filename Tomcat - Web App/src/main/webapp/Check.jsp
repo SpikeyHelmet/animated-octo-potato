@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>WOW - School Portal</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
+    <link
+      rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
+    <link
+      rel="stylesheet" href="${pageContext.request.contextPath}/css/fontawesome.css"/>
+    <link 
+      rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
     
 </head>
 <body class="checkSVG">
@@ -47,9 +51,15 @@ else
 	out.println("<a href=\"views/index.jsp\" role=\"button\">Homepage</a>");
 }
 %>
+
+
 </button>
 </div>
-
+<div class="d-flex justify-content-center p-2">
+<button class="myButton2">
+	<a href="views/sync.jsp" role="button">Sync Roles</a>
+</button>
+</div>
 
 </body>
 </html>

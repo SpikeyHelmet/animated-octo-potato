@@ -30,7 +30,7 @@ public class faculty extends HttpServlet {
 		
 		try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/" + dept, "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
+		Connection con = DriverManager.getConnection( System.getenv("mysqlhost") + dept, System.getenv("mysqlusr"), System.getenv("mysqlpw") );
 		
 		 Statement stmt = con.createStatement();
 

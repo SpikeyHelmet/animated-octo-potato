@@ -9,9 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.duosecurity.client.Http;
 
 @WebServlet("/duoPreauth")
 public class duoPreauth extends HttpServlet {
@@ -28,7 +33,7 @@ public class duoPreauth extends HttpServlet {
 		
 		try {
 		      Class.forName("com.mysql.cj.jdbc.Driver");
-		      Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/s2424_spikey", "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
+		      Connection con = DriverManager.getConnection( System.getenv("mysqlhost") + "/CSE", System.getenv("mysqlusr"), System.getenv("mysqlpw") );
 			
 		      PreparedStatement stmt = con.prepareStatement("SELECT * FROM Authentication WHERE Username = ?");
 		      
@@ -44,14 +49,47 @@ public class duoPreauth extends HttpServlet {
 		      
 		      if (rs.next()) {
 			      String uid = rs.getString("userid");
-    	   		  if(uid == null)
+    	   		  if(uid != null)
     	   		  {
-    	   			response.sendRedirect(request.getContextPath() + "/duoEnroll");
+    	   		   Http req = new Http("POST", System.getenv("host"), "/auth/v2/preauth");
+    	 	      
+	    	 	      try {
+	    	 	    	 req.addParam("user_id", uid);
+	    	 			 req.signRequest(System.getenv("ikey"),
+	    	 					  System.getenv("skey"));
+	    	 	      
+	    	 			 JSONObject result = null;
+	    	 		     result = (JSONObject)req.executeRequest();
+	    	 		     String status = result.getString("result");
+	    	 		     if(status.equalsIgnoreCase("auth"))
+	    	 		     {
+	    	    	   			request.setAttribute("userid", uid);
+	    	    	   			request.getRequestDispatcher("views/AuthM.jsp").forward(request, response);
+	    	 		     }else if(status.equalsIgnoreCase("allow"))
+	    	 		     {
+	    			    	 Cookie ck = new Cookie("duo","Authenticated");
+	    			    	 ck.setMaxAge(1200);
+	    			    	 response.addCookie(ck);
+	    			    	 response.sendRedirect("views/index.jsp");
+	    	 		     }else if(status.equalsIgnoreCase("deny"))
+	    	 		     {
+	    	 		    	throw new Exception("Your access has been denied");
+	    	 		     }
+	    	 		     else if(status.equalsIgnoreCase("enroll")) {
+	    	    	   			response.sendRedirect(request.getContextPath() + "/duoEnroll");
+	    	 		     }
+	    	 		     
+	    	 	      }
+	    	 	      catch(Exception e)
+	    	 	      {
+	    	 	    	 System.out.println(e);
+	    	 	      }
+
     	   		  }
     	   		  else
     	   		  {
-    	   			request.setAttribute("userid", uid);
-    	   			request.getRequestDispatcher("views/passcode.jsp").forward(request, response);
+    	   			response.sendRedirect(request.getContextPath() + "/duoEnroll");
+
     	   		  }
 		      }
 

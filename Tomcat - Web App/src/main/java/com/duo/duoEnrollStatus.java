@@ -46,7 +46,7 @@ public class duoEnrollStatus extends HttpServlet {
 
 			     if(abc.equalsIgnoreCase("success")){
 			    	 
-			      Connection con = DriverManager.getConnection("jdbc:mysql://23.88.33.117:3306/s2424_spikey", "u2424_3iEuNEPWwN", "sEzylB843jS9Epi6+bKTEN=!");
+				      Connection con = DriverManager.getConnection( System.getenv("mysqlhost") + "/CSE", System.getenv("mysqlusr"), System.getenv("mysqlpw") );
 				
 					PreparedStatement pstmt = con
 			                .prepareStatement("UPDATE Authentication SET `userid`= ? WHERE `Username`= ?");
